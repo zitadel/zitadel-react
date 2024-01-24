@@ -1,1 +1,1 @@
-export { createZITADELAuth, ZitadelConfig } from "./zitadelAuth";
+export { createZitadelAuth, ZitadelConfig } from "./zitadelAuth";

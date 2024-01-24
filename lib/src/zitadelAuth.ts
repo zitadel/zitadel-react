@@ -8,31 +8,37 @@ import {
 export interface ZitadelConfig {
   client_id: string;
   issuer: string;
+  redirect_uri?: string;
+  post_logout_redirect_uri?: string;
+  scope?: string;
   project_resource_id?: string;
 }
 
 interface ZitadelAuth {
   authorize(): Promise<void>;
-  clearAuth(): Promise<void>;
+  signout(): Promise<void>;
   userManager: UserManager;
 }
 
-export function createZITADELAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
+export function createZitadelAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
   const authConfig: UserManagerSettings = {
-    authority: `${zitadelConfig.issuer}`, //Replace with your issuer URL
-    client_id: `${zitadelConfig.client_id}`, //Replace with your client id
-    redirect_uri: "http://localhost:3000/callback",
-    response_type: "code",
-    scope: `openid profile email ${
-      zitadelConfig.project_resource_id
-        ? `urn:zitadel:iam:org:project:id:${zitadelConfig.project_resource_id}:aud urn:zitadel:iam:org:projects:roles`
-        : ""
+    authority: `${zitadelConfig.issuer}`,
+    client_id: `${zitadelConfig.client_id}`,
+    redirect_uri: `${
+      zitadelConfig.redirect_uri ?? "http://localhost:3000/callback"
     }`,
-    post_logout_redirect_uri: "http://localhost:3000/",
-    //   userinfo_endpoint:
-    //     "https://instance-some_text.zitadel.cloud/oidc/v1/userinfo",
+    response_type: "code",
+    scope:
+      zitadelConfig.scope ??
+      `openid profile email ${
+        zitadelConfig.project_resource_id
+          ? `urn:zitadel:iam:org:project:id:${zitadelConfig.project_resource_id}:aud urn:zitadel:iam:org:projects:roles`
+          : ""
+      }`,
+    post_logout_redirect_uri: `${
+      zitadelConfig.post_logout_redirect_uri ?? "http://localhost:3000/"
+    }`,
     response_mode: "query",
-    //   code_challenge_method: "S256",
   };
 
   const userManager = new UserManager({
@@ -44,13 +50,13 @@ export function createZITADELAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
     return userManager.signinRedirect();
   };
 
-  const clearAuth = () => {
+  const signout = () => {
     return userManager.signoutRedirect();
   };
 
   const oidc = {
     authorize,
-    clearAuth,
+    signout,
     userManager,
   };
 

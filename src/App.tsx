@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { createZITADELAuth, ZitadelConfig } from "@zitadel/react";
+import { createZitadelAuth, ZitadelConfig } from "@zitadel/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Login from "./components/Login";
@@ -12,28 +12,29 @@ function App() {
     issuer: "",
     client_id: "",
   };
-  const oidc = createZITADELAuth(config);
+
+  const zitadel = createZitadelAuth(config);
 
   function login() {
-    oidc.authorize();
+    zitadel.authorize();
   }
 
   function signout() {
-    oidc.clearAuth();
+    zitadel.signout();
   }
 
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    oidc.userManager.getUser().then((user) => {
+    zitadel.userManager.getUser().then((user) => {
       if (user) {
         setAuthenticated(true);
       } else {
         setAuthenticated(false);
       }
     });
-  }, [oidc]);
+  }, [zitadel]);
 
   return (
     <div className="App">
@@ -59,7 +60,7 @@ function App() {
                   userInfo={userInfo}
                   setUserInfo={setUserInfo}
                   handleLogout={signout}
-                  userManager={oidc.userManager}
+                  userManager={zitadel.userManager}
                 />
               }
             />
