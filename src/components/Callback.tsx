@@ -19,8 +19,34 @@ const Callback = ({
   handleLogout,
 }: Props) => {
   useEffect(() => {
-    if (authenticated === null || userInfo === null) {
-      userManager()
+    if (authenticated === null) {
+      userManager
+        .signinRedirectCallback()
+        .then((user: any) => {
+          if (user) {
+            setAuth(true);
+            const access_token = user.access_token;
+            const userInfoEndpoint = `${issuer}oidc/v1/userinfo`;
+            fetch(userInfoEndpoint, {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
+              },
+            })
+              .then((response) => response.json())
+              .then((userInfo) => {
+                setUserInfo(userInfo);
+              });
+          } else {
+            setAuth(false);
+          }
+        })
+        .catch((error: any) => {
+          setAuth(false);
+        });
+    }
+    if (authenticated === true && userInfo === null) {
+      userManager
+        .getUser()
         .then((user: any) => {
           if (user) {
             setAuth(true);

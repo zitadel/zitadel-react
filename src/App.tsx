@@ -9,8 +9,8 @@ import Callback from "./components/Callback";
 
 function App() {
   const config: ZitadelConfig = {
-    issuer: "",
-    client_id: "",
+    issuer: "https://maxsecond-ekvdou.zitadel.cloud/",
+    client_id: "251008059999082377@react",
   };
 
   const zitadel = createZitadelAuth(config);
