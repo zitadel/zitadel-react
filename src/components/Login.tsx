@@ -17,7 +17,7 @@ const Login = ({ authenticated, handleLogin }: Props) => {
               handleLogin();
             }}
           >
-            Please log in.
+            Login
           </button>
         </div>
       )}
