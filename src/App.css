@@ -37,6 +37,15 @@ button {
   border: 1px solid #333333;
 }
 
+.user {
+  font-size: 1rem;
+}
+
+.user .description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

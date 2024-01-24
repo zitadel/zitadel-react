@@ -23,7 +23,7 @@ function App() {
     zitadel.signout();
   }
 
-  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {

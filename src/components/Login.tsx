@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 
 type Props = {
   handleLogin: () => void;
-  authenticated: boolean;
+  authenticated: boolean | null;
 };
 const Login = ({ authenticated, handleLogin }: Props) => {
   return (

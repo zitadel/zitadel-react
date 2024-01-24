@@ -2,8 +2,8 @@ import { useEffect } from "react";
 
 type Props = {
   issuer: string;
-  authenticated: boolean;
-  setAuth: (authenticated: boolean) => void;
+  authenticated: boolean | null;
+  setAuth: (authenticated: boolean | null) => void;
   userManager: any;
   userInfo: any;
   setUserInfo: any;
@@ -19,9 +19,8 @@ const Callback = ({
   handleLogout,
 }: Props) => {
   useEffect(() => {
-    if (authenticated === false) {
-      userManager
-        .signinRedirectCallback()
+    if (authenticated === null || userInfo === null) {
+      userManager()
         .then((user: any) => {
           if (user) {
             setAuth(true);
@@ -45,12 +44,11 @@ const Callback = ({
         });
     }
   }, [authenticated, userManager, setAuth]);
-  console.log(authenticated, userInfo);
   if (authenticated === true && userInfo) {
     return (
-      <div>
+      <div className="user">
         <h1>Welcome, {userInfo.name}!</h1>
-        <h2>Your ZITADEL Profile Information</h2>
+        <p className="description">Your ZITADEL Profile Information</p>
         <h3>Name: {userInfo.name}</h3>
         <h3>Email: {userInfo.email}</h3>
         <h3>Email Verified: {userInfo.email_verified ? "Yes" : "No"}</h3>
