@@ -6,6 +6,7 @@ export interface ZitadelConfig {
     post_logout_redirect_uri?: string;
     scope?: string;
     project_resource_id?: string;
+    prompt?: string;
 }
 interface ZitadelAuth {
     authorize(): Promise<void>;

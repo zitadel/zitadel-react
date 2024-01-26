@@ -9,6 +9,7 @@ type Props = {
   setUserInfo: any;
   handleLogout: any;
 };
+
 const Callback = ({
   issuer,
   authenticated,
@@ -18,6 +19,19 @@ const Callback = ({
   setUserInfo,
   handleLogout,
 }: Props) => {
+  function loadUserDiscovery(accessToken: string) {
+    const userInfoEndpoint = `${issuer}oidc/v1/userinfo`;
+    fetch(userInfoEndpoint, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((userInfo) => {
+        setUserInfo(userInfo);
+      });
+  }
+
   useEffect(() => {
     if (authenticated === null) {
       userManager
@@ -25,17 +39,7 @@ const Callback = ({
         .then((user: any) => {
           if (user) {
             setAuth(true);
-            const access_token = user.access_token;
-            const userInfoEndpoint = `${issuer}oidc/v1/userinfo`;
-            fetch(userInfoEndpoint, {
-              headers: {
-                Authorization: `Bearer ${access_token}`,
-              },
-            })
-              .then((response) => response.json())
-              .then((userInfo) => {
-                setUserInfo(userInfo);
-              });
+            loadUserDiscovery(user.access_token);
           } else {
             setAuth(false);
           }
@@ -50,17 +54,7 @@ const Callback = ({
         .then((user: any) => {
           if (user) {
             setAuth(true);
-            const access_token = user.access_token;
-            const userInfoEndpoint = `${issuer}oidc/v1/userinfo`;
-            fetch(userInfoEndpoint, {
-              headers: {
-                Authorization: `Bearer ${access_token}`,
-              },
-            })
-              .then((response) => response.json())
-              .then((userInfo) => {
-                setUserInfo(userInfo);
-              });
+            loadUserDiscovery(user.access_token);
           } else {
             setAuth(false);
           }
@@ -73,12 +67,17 @@ const Callback = ({
   if (authenticated === true && userInfo) {
     return (
       <div className="user">
-        <h1>Welcome, {userInfo.name}!</h1>
+        <h2>Welcome, {userInfo.name}!</h2>
         <p className="description">Your ZITADEL Profile Information</p>
-        <h3>Name: {userInfo.name}</h3>
-        <h3>Email: {userInfo.email}</h3>
-        <h3>Email Verified: {userInfo.email_verified ? "Yes" : "No"}</h3>
-        <h3>Locale: {userInfo.locale}</h3>
+        <p>Name: {userInfo.name}</p>
+        <p>Email: {userInfo.email}</p>
+        <p>Email Verified: {userInfo.email_verified ? "Yes" : "No"}</p>
+        <p>
+          Roles:{" "}
+          {JSON.stringify(
+            userInfo["urn:zitadel:iam:org:project:251288942656156695:roles"]
+          )}
+        </p>
 
         <button onClick={handleLogout}>Log out</button>
       </div>

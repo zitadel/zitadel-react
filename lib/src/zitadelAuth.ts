@@ -1,6 +1,5 @@
 import {
   UserManagerSettings,
-  Logger,
   UserManager,
   WebStorageStateStore,
 } from "oidc-client-ts";
@@ -12,6 +11,7 @@ export interface ZitadelConfig {
   post_logout_redirect_uri?: string;
   scope?: string;
   project_resource_id?: string;
+  prompt?: string;
 }
 
 interface ZitadelAuth {
@@ -35,6 +35,7 @@ export function createZitadelAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
           ? `urn:zitadel:iam:org:project:id:${zitadelConfig.project_resource_id}:aud urn:zitadel:iam:org:projects:roles`
           : ""
       }`,
+    prompt: zitadelConfig.prompt ?? "",
     post_logout_redirect_uri: `${
       zitadelConfig.post_logout_redirect_uri ?? "http://localhost:3000/"
     }`,
