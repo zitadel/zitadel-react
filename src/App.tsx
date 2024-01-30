@@ -9,9 +9,8 @@ import Callback from "./components/Callback";
 
 function App() {
   const config: ZitadelConfig = {
-    issuer: "",
+    authority: "",
     client_id: "",
-    prompt: "login",
   };
 
   const zitadel = createZitadelAuth(config);
@@ -25,7 +24,6 @@ function App() {
   }
 
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
-  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     zitadel.userManager.getUser().then((user) => {
@@ -55,11 +53,8 @@ function App() {
               path="/callback"
               element={
                 <Callback
-                  issuer={config.issuer}
                   authenticated={authenticated}
                   setAuth={setAuthenticated}
-                  userInfo={userInfo}
-                  setUserInfo={setUserInfo}
                   handleLogout={signout}
                   userManager={zitadel.userManager}
                 />

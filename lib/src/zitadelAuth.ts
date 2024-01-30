@@ -4,15 +4,9 @@ import {
   WebStorageStateStore,
 } from "oidc-client-ts";
 
-export interface ZitadelConfig {
-  client_id: string;
-  issuer: string;
-  redirect_uri?: string;
-  post_logout_redirect_uri?: string;
-  scope?: string;
+export type ZitadelConfig = Partial<UserManagerSettings> & {
   project_resource_id?: string;
-  prompt?: string;
-}
+};
 
 interface ZitadelAuth {
   authorize(): Promise<void>;
@@ -22,7 +16,7 @@ interface ZitadelAuth {
 
 export function createZitadelAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
   const authConfig: UserManagerSettings = {
-    authority: `${zitadelConfig.issuer}`,
+    authority: `${zitadelConfig.authority}`,
     client_id: `${zitadelConfig.client_id}`,
     redirect_uri: `${
       zitadelConfig.redirect_uri ?? "http://localhost:3000/callback"
@@ -44,6 +38,7 @@ export function createZitadelAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
 
   const userManager = new UserManager({
     userStore: new WebStorageStateStore({ store: window.localStorage }),
+    loadUserInfo: true,
     ...authConfig,
   });
 

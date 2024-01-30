@@ -25,9 +25,8 @@ The following is an example for a minimal OIDC configuration:
 
 ```typescript
 const zitadelAuth = createZitadelAuth({
-  issuer: `${myZITADELInstancesOrigin}`,
+  authority: `${myZITADELInstancesOrigin}`,
   client_id: `${myApplicationsClientID}`,
-  project_resource_id: `${myApplicationsProjectResourceID}`,
 });
 ```
 

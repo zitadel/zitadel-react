@@ -1,45 +1,33 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { UserManager, User } from "oidc-client-ts";
 
 type Props = {
-  issuer: string;
   authenticated: boolean | null;
   setAuth: (authenticated: boolean | null) => void;
-  userManager: any;
-  userInfo: any;
-  setUserInfo: any;
+  userManager: UserManager;
   handleLogout: any;
 };
 
 const Callback = ({
-  issuer,
   authenticated,
   setAuth,
   userManager,
-  userInfo,
-  setUserInfo,
+
   handleLogout,
 }: Props) => {
-  function loadUserDiscovery(accessToken: string) {
-    const userInfoEndpoint = `${issuer}oidc/v1/userinfo`;
-    fetch(userInfoEndpoint, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((userInfo) => {
-        setUserInfo(userInfo);
-      });
-  }
+  const [userInfo, setUserInfo] = useState<User | null>(null);
 
   useEffect(() => {
     if (authenticated === null) {
       userManager
         .signinRedirectCallback()
-        .then((user: any) => {
+        .then((user: User) => {
           if (user) {
+            console.log("u", user);
+            userManager.getUser().then(console.log);
             setAuth(true);
-            loadUserDiscovery(user.access_token);
+            setUserInfo(user);
+            // loadUserDiscovery(user.access_token);
           } else {
             setAuth(false);
           }
@@ -51,10 +39,12 @@ const Callback = ({
     if (authenticated === true && userInfo === null) {
       userManager
         .getUser()
-        .then((user: any) => {
+        .then((user) => {
           if (user) {
+            console.log("b", user);
+
             setAuth(true);
-            loadUserDiscovery(user.access_token);
+            setUserInfo(user);
           } else {
             setAuth(false);
           }
@@ -67,15 +57,17 @@ const Callback = ({
   if (authenticated === true && userInfo) {
     return (
       <div className="user">
-        <h2>Welcome, {userInfo.name}!</h2>
+        <h2>Welcome, {userInfo.profile.name}!</h2>
         <p className="description">Your ZITADEL Profile Information</p>
-        <p>Name: {userInfo.name}</p>
-        <p>Email: {userInfo.email}</p>
-        <p>Email Verified: {userInfo.email_verified ? "Yes" : "No"}</p>
+        <p>Name: {userInfo.profile.name}</p>
+        <p>Email: {userInfo.profile.email}</p>
+        <p>Email Verified: {userInfo.profile.email_verified ? "Yes" : "No"}</p>
         <p>
           Roles:{" "}
           {JSON.stringify(
-            userInfo["urn:zitadel:iam:org:project:251288942656156695:roles"]
+            userInfo.profile[
+              "urn:zitadel:iam:org:project:251288942656156695:roles"
+            ]
           )}
         </p>
 
