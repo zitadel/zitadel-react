@@ -23,11 +23,8 @@ const Callback = ({
         .signinRedirectCallback()
         .then((user: User) => {
           if (user) {
-            console.log("u", user);
-            userManager.getUser().then(console.log);
             setAuth(true);
             setUserInfo(user);
-            // loadUserDiscovery(user.access_token);
           } else {
             setAuth(false);
           }
@@ -41,8 +38,6 @@ const Callback = ({
         .getUser()
         .then((user) => {
           if (user) {
-            console.log("b", user);
-
             setAuth(true);
             setUserInfo(user);
           } else {
