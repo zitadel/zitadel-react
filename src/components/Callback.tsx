@@ -61,7 +61,7 @@ const Callback = ({
           Roles:{" "}
           {JSON.stringify(
             userInfo.profile[
-              "urn:zitadel:iam:org:project:251288942656156695:roles"
+              "urn:zitadel:iam:org:project:roles"
             ]
           )}
         </p>
