@@ -10,7 +10,6 @@ const Login = ({ authenticated, handleLogin }: Props) => {
       {authenticated === null && <div>Loading...</div>}
       {authenticated === false && (
         <div>
-          <h1>Welcome!</h1>
           <button
             onClick={() => {
               // Perform the authorization request, including the code challenge
