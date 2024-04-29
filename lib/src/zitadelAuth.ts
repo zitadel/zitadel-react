@@ -8,7 +8,7 @@ export type ZitadelConfig = Partial<UserManagerSettings> & {
   project_resource_id?: string;
 };
 
-interface ZitadelAuth {
+export interface ZitadelAuth {
   authorize(): Promise<void>;
   signout(): Promise<void>;
   userManager: UserManager;
