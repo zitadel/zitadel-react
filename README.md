@@ -24,7 +24,7 @@ The following pages are added to the scaffolded example application:
 To run the example, navigate to the `/lib` folder and run `yarn build`.
 
 ```bash
-cd /lib
+cd ./lib
 yarn install
 yarn build
 ```
