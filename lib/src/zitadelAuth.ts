@@ -35,6 +35,7 @@ export function createZitadelAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
     }`,
     response_mode: zitadelConfig.response_mode ?? "query",
     disablePKCE: zitadelConfig.disablePKCE,
+    extraQueryParams: zitadelConfig.extraQueryParams,
   };
 
   const userManager = new UserManager({
