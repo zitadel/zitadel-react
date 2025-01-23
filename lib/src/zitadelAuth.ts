@@ -21,7 +21,7 @@ export function createZitadelAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
     redirect_uri: `${
       zitadelConfig.redirect_uri ?? "http://localhost:3000/callback"
     }`,
-    response_type: "code",
+    response_type: zitadelConfig.response_type ?? "code",
     scope:
       zitadelConfig.scope ??
       `openid profile email ${
@@ -33,7 +33,8 @@ export function createZitadelAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
     post_logout_redirect_uri: `${
       zitadelConfig.post_logout_redirect_uri ?? "http://localhost:3000/"
     }`,
-    response_mode: "query",
+    response_mode: zitadelConfig.response_mode ?? "query",
+    disablePKCE: zitadelConfig.disablePKCE,
   };
 
   const userManager = new UserManager({
