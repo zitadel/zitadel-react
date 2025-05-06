@@ -9,8 +9,8 @@ import Callback from "./components/Callback";
 
 function App() {
   const config: ZitadelConfig = {
-    authority: "",
-    client_id: "",
+    authority: "https://zitadel-login-nine.vercel.app",
+    client_id: "316117135854255049",
   };
 
   const zitadel = createZitadelAuth(config);
