@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 
 type Props = {
   handleLogin: () => void;
@@ -20,7 +20,7 @@ const Login = ({ authenticated, handleLogin }: Props) => {
           </button>
         </div>
       )}
-      {authenticated && <Navigate to="/callback" />}
+      {authenticated && <Navigate to='/callback' />}
     </div>
   );
 };

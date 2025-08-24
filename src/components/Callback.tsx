@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { UserManager, User } from "oidc-client-ts";
+import { useEffect, useState } from 'react';
+import { UserManager, User } from 'oidc-client-ts';
 
 type Props = {
   authenticated: boolean | null;
@@ -29,14 +29,14 @@ const Callback = ({
             setAuth(false);
           }
         })
-        .catch((error: any) => {
+        .catch(() => {
           setAuth(false);
         });
     }
     if (authenticated === true && userInfo === null) {
       userManager
         .getUser()
-        .then((user) => {
+        .then(user => {
           if (user) {
             setAuth(true);
             setUserInfo(user);
@@ -44,25 +44,23 @@ const Callback = ({
             setAuth(false);
           }
         })
-        .catch((error: any) => {
+        .catch(() => {
           setAuth(false);
         });
     }
   }, [authenticated, userManager, setAuth]);
   if (authenticated === true && userInfo) {
     return (
-      <div className="user">
+      <div className='user'>
         <h2>Welcome, {userInfo.profile.name}!</h2>
-        <p className="description">Your ZITADEL Profile Information</p>
+        <p className='description'>Your ZITADEL Profile Information</p>
         <p>Name: {userInfo.profile.name}</p>
         <p>Email: {userInfo.profile.email}</p>
-        <p>Email Verified: {userInfo.profile.email_verified ? "Yes" : "No"}</p>
+        <p>Email Verified: {userInfo.profile.email_verified ? 'Yes' : 'No'}</p>
         <p>
-          Roles:{" "}
+          Roles:{' '}
           {JSON.stringify(
-            userInfo.profile[
-              "urn:zitadel:iam:org:project:roles"
-            ]
+            userInfo.profile['urn:zitadel:iam:org:project:roles']
           )}
         </p>
 

@@ -2,7 +2,7 @@ import {
   UserManagerSettings,
   UserManager,
   WebStorageStateStore,
-} from "oidc-client-ts";
+} from 'oidc-client-ts';
 
 export type ZitadelConfig = Partial<UserManagerSettings> & {
   project_resource_id?: string;
@@ -19,21 +19,21 @@ export function createZitadelAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
     authority: `${zitadelConfig.authority}`,
     client_id: `${zitadelConfig.client_id}`,
     redirect_uri: `${
-      zitadelConfig.redirect_uri ?? "http://localhost:3000/callback"
+      zitadelConfig.redirect_uri ?? 'http://localhost:3000/callback'
     }`,
-    response_type: zitadelConfig.response_type ?? "code",
+    response_type: zitadelConfig.response_type ?? 'code',
     scope:
       zitadelConfig.scope ??
       `openid profile email ${
         zitadelConfig.project_resource_id
           ? `urn:zitadel:iam:org:project:id:${zitadelConfig.project_resource_id}:aud urn:zitadel:iam:org:projects:roles`
-          : ""
+          : ''
       }`,
-    prompt: zitadelConfig.prompt ?? "",
+    prompt: zitadelConfig.prompt ?? '',
     post_logout_redirect_uri: `${
-      zitadelConfig.post_logout_redirect_uri ?? "http://localhost:3000/"
+      zitadelConfig.post_logout_redirect_uri ?? 'http://localhost:3000/'
     }`,
-    response_mode: zitadelConfig.response_mode ?? "query",
+    response_mode: zitadelConfig.response_mode ?? 'query',
     disablePKCE: zitadelConfig.disablePKCE,
     extraQueryParams: zitadelConfig.extraQueryParams,
   };

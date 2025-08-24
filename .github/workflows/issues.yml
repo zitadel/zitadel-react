@@ -25,8 +25,8 @@ jobs:
         id: checkUserMember
         if: github.actor != 'dependabot[bot]'
         with:
-         username: ${{ github.actor }}
-         GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          username: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
       - name: add pr
         uses: actions/add-to-project@v1.0.1
         if: ${{ github.event_name == 'pull_request_target' && github.actor != 'dependabot[bot]' && !contains(steps.checkUserMember.outputs.teams, 'engineers')}}

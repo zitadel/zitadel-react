@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { createZitadelAuth, ZitadelConfig } from "@zitadel/react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import { createZitadelAuth, ZitadelConfig } from '@zitadel/react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Login from "./components/Login";
-import Callback from "./components/Callback";
+import Login from './components/Login';
+import Callback from './components/Callback';
 
 function App() {
   const config: ZitadelConfig = {
@@ -26,7 +26,7 @@ function App() {
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    zitadel.userManager.getUser().then((user) => {
+    zitadel.userManager.getUser().then(user => {
       if (user) {
         setAuthenticated(true);
       } else {
@@ -36,21 +36,21 @@ function App() {
   }, [zitadel]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className='App'>
+      <header className='App-header'>
+        <img src={logo} className='App-logo' alt='logo' />
         <p>Welcome to ZITADEL React</p>
 
         <BrowserRouter>
           <Routes>
             <Route
-              path="/"
+              path='/'
               element={
                 <Login authenticated={authenticated} handleLogin={login} />
               }
             />
             <Route
-              path="/callback"
+              path='/callback'
               element={
                 <Callback
                   authenticated={authenticated}

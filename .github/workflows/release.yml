@@ -2,7 +2,7 @@ name: Release @zitadel/react package
 on:
   push:
     branches:
-      - "main"
+      - 'main'
 
 jobs:
   release:
