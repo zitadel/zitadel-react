@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { createZitadelAuth, ZitadelConfig } from "@zitadel/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
 import Login from "./components/Login";
 import Callback from "./components/Callback";
+import JWTContainer from "./components/JWTContainer";
 
 function App() {
   const config: ZitadelConfig = {
-    authority: "https://zitadel-login-zeta.vercel.app",
-    client_id: "326833174820750579",
+    authority: "https://fcoppede-zitadel-zdho6i.us1.zitadel.cloud",
+    client_id: "322780308455918550",
   };
 
   const zitadel = createZitadelAuth(config);
@@ -19,18 +20,24 @@ function App() {
     zitadel.authorize();
   }
 
-  function signout() {
+  function logout() {
     zitadel.signout();
   }
 
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [idToken, setIdToken] = useState<string | null>(null);
 
   useEffect(() => {
     zitadel.userManager.getUser().then((user) => {
       if (user) {
         setAuthenticated(true);
+        setAccessToken(user.access_token ?? null);
+        setIdToken(user.id_token ?? null);
       } else {
         setAuthenticated(false);
+        setAccessToken(null);
+        setIdToken(null);
       }
     });
   }, [zitadel]);
@@ -38,27 +45,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Welcome to ZITADEL React</p>
-
         <BrowserRouter>
+          <Navbar />
+          <Login authenticated={authenticated} handleLogin={login} handleLogout={logout} />
+          <JWTContainer accessToken={accessToken} idToken={idToken} />
           <Routes>
             <Route
-              path="/"
-              element={
-                <Login authenticated={authenticated} handleLogin={login} />
-              }
-            />
-            <Route
               path="/callback"
-              element={
-                <Callback
-                  authenticated={authenticated}
-                  setAuth={setAuthenticated}
-                  handleLogout={signout}
-                  userManager={zitadel.userManager}
-                />
-              }
+              element={<Callback setAuth={setAuthenticated} userManager={zitadel.userManager} />}
             />
           </Routes>
         </BrowserRouter>

@@ -1,26 +1,22 @@
-import { Navigate } from "react-router-dom";
-
 type Props = {
   handleLogin: () => void;
+  handleLogout: () => void;
   authenticated: boolean | null;
 };
-const Login = ({ authenticated, handleLogin }: Props) => {
+const Login = ({ authenticated, handleLogin, handleLogout }: Props) => {
   return (
-    <div>
-      {authenticated === null && <div>Loading...</div>}
-      {authenticated === false && (
-        <div>
-          <button
-            onClick={() => {
-              // Perform the authorization request, including the code challenge
-              handleLogin();
-            }}
-          >
-            Login
-          </button>
-        </div>
+    <div className="d-flex align-items-center mx-3 my-3" style={{ paddingLeft: "0.8rem" }}>
+      {!authenticated && (
+        <button className="btn btn-primary login-btn" onClick={handleLogin}>
+          Login
+        </button>
       )}
-      {authenticated && <Navigate to="/callback" />}
+
+      {authenticated && (
+        <button className="btn btn-outline-secondary logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+      )}
     </div>
   );
 };
