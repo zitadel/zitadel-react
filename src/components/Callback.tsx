@@ -34,7 +34,6 @@ const Callback = ({ setAuth, userManager }: Props) => {
     handleCallback();
   }, [userManager, setAuth, navigate]);
 
-  // No UI, just a silent callback handler
   return null;
 };
 
