@@ -1,17 +1,17 @@
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', sans-serif !important;
 }
 
 .login-btn {
-    background-color: #5469D4;
-    border-color: #5469D4;
-    color: white;
+    background-color: #5469D4 !important;
+    border-color: #5469D4 !important;
+    color: white !important;
 }
 
 .logout-btn {
-    background-color:white;
-    border-color:#d4dae0;
-    color: #CD3D56;
+    background-color:white !important;
+    border-color:#d4dae0 !important;
+    color: #CD3D56 !important;
 }
 
 .login-btn:hover,
