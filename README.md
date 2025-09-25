@@ -117,4 +117,6 @@ const config: ZitadelConfig = {
 ```
 
 7. **Run the application**
-### `yarn start`
+```bash
+yarn start
+```
