@@ -1,4 +1,4 @@
-# @zitadel/react Example
+# @zitadel/react Quickstart SPA
 <p align="center">
     <img src="https://raw.githubusercontent.com/zitadel/zitadel/refs/heads/main/docs/static/logos/zitadel-logo-dark%402x.png" alt="Zitadel Logo" max-height="200px" width="auto" />
 </p>
@@ -116,3 +116,5 @@ const config: ZitadelConfig = {
 };
 ```
 
+7. **Run the application**
+### `yarn start`
