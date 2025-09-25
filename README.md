@@ -103,7 +103,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ![App Screenshot](assets/token_settings.png)
 
 6. **Configure `ZitadelConfig`**  
-   - Open `src/App.tsx` and replace the placeholder values with your application info:
+Open `src/App.tsx` and replace the placeholder values with your application info:
 
 ```js
 const config: ZitadelConfig = {
