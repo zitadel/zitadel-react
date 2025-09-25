@@ -35,7 +35,7 @@ const JWTContainer = ({ accessToken, idToken }: Props) => {
             setCopyState((prev) => ({ ...prev, [target]: true }));
             setTimeout(() => {
                 setCopyState((prev) => ({ ...prev, [target]: false }));
-            }, 1500); // animation duration
+            }, 1500);
         });
     };
 

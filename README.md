@@ -1,4 +1,7 @@
 # @zitadel/react Example
+<p align="center">
+    <img src="https://raw.githubusercontent.com/zitadel/zitadel/refs/heads/main/docs/static/logos/zitadel-logo-dark%402x.png" alt="Zitadel Logo" max-height="200px" width="auto" />
+</p>
 
 Authenticate your [ZITADEL](https://zitadel.com) users within your React applications.
 
@@ -71,3 +74,45 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Setup Instructions
+
+1. **Log into the Zitadel Customer Portal**  
+   Go to the [Zitadel Customer Portal](https://zitadel.com/admin/dashboard)
+
+2. **Create an Instance**  
+   - Choose a region and create your new instance.
+
+3. **Create a Project**  
+   - Inside your instance, go to Projects -> Create New Project
+
+![App Screenshot](assets/new_project.png)
+
+4. **Create an Application**  
+   - New **"User Agent"**
+   - Select **"PKCE"**
+   - Enable **"Development Mode"**
+   - Configure your **Redirect URI** and **Post Logout URI** (`http://localhost:3000` for local testing)
+   - Click **"Continue"** and **"Create"**
+   - Copy the **"Client ID"**
+
+![App Screenshot](assets/new_application.png)
+
+5. **Change your token type to `JWT` in your application settings**  
+
+![App Screenshot](assets/token_settings.png)
+
+6. **Configure `ZitadelConfig`**  
+   - Open `src/App.tsx` and replace the placeholder values with your application info:
+
+```js
+const config: ZitadelConfig = {
+    authority: "https://CUSTOM_DOMAIN",
+    client_id: "YOUR_CLIENT_ID",
+    redirect_uri: "http://localhost:3000/callback",
+    post_logout_redirect_uri: "http://localhost:3000",
+    response_type: 'code',
+    scope: 'openid profile email'
+};
+```
+

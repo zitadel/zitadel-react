@@ -9,9 +9,14 @@ import Callback from "./components/Callback";
 import JWTContainer from "./components/JWTContainer";
 
 function App() {
+
   const config: ZitadelConfig = {
-    authority: "https://fcoppede-zitadel-zdho6i.us1.zitadel.cloud",
-    client_id: "322780308455918550",
+    authority: "https://CUSTOM_DOMAIN",
+    client_id: "YOUR_CLIENT_ID",
+    redirect_uri: "http://localhost:3000/callback",
+    post_logout_redirect_uri: "http://localhost:3000",
+    response_type: 'code',
+    scope: 'openid profile email'
   };
 
   const zitadel = createZitadelAuth(config);
