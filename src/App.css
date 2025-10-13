@@ -1,56 +1,43 @@
-.App {
-  text-align: center;
+body {
+    font-family: 'Lato', sans-serif !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.login-btn {
+    background-color: #5469D4 !important;
+    border-color: #5469D4 !important;
+    color: white !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logout-btn {
+    background-color:white !important;
+    border-color:#d4dae0 !important;
+    color: #CD3D56 !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.login-btn:hover,
+.login-btn:focus,
+.login-btn:active {
+  background-color: #5469D4 !important;
+  border-color: #5469D4 !important;
+  color: white !important;
 }
 
-.App-link {
-  color: #61dafb;
+.logout-btn:hover,
+.logout-btn:focus,
+.logout-btn:active {
+  background-color: white !important;
+  border-color: #d4dae0 !important;
+  color: #CD3D56 !important;
 }
 
-button {
-  padding: 0.5rem 1rem;
-  background: white;
-  color: black;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  border: 1px solid #333333;
-}
-
-.user {
-  font-size: 1rem;
-}
-
-.user .description {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.jwt-box {
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+    background-color: #f8f9fa;
+    /* Bootstrap light */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    max-width: 100%;
+    overflow-x: auto;
 }

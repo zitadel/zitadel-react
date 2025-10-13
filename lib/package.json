@@ -28,7 +28,7 @@
   "author": "Max Peintner, <max@zitadel.com>",
   "license": "MIT",
   "dependencies": {
-    "oidc-client-ts": "^2.4.0"
+    "oidc-client-ts": "^3.3.0"
   },
   "devDependencies": {
     "typescript": "^5.3.3"
