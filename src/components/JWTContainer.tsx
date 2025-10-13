@@ -10,7 +10,8 @@ function decodeJWT(jwt: string) {
     const parts = jwt.split('.');
 
     if (parts.length !== 3) {
-        throw new Error('Invalid JWT format');
+        console.log("Token is not in JWT format");
+        return jwt;
     }
 
     // The payload is the second part (index 1)
@@ -44,7 +45,7 @@ const JWTContainer = ({ accessToken, idToken }: Props) => {
             <div className="col-md-6">
                 <div className="card mb-3 shadow-sm">
                     <div className="card-header fw-bold d-flex justify-content-between align-items-center">
-                        Decoded Access Token
+                        Access Token
                         {accessToken && (
                             <i
                                 className={`fas fa-copy copy-btn ${copyState.accessToken ? "text-success" : "text-primary"
@@ -62,7 +63,7 @@ const JWTContainer = ({ accessToken, idToken }: Props) => {
             <div className="col-md-6">
                 <div className="card mb-3 shadow-sm">
                     <div className="card-header fw-bold d-flex justify-content-between align-items-center">
-                        Decoded ID Token
+                        ID Token
                         {idToken && (
                             <i
                                 className={`fas fa-copy copy-btn ${copyState.idToken ? "text-success" : "text-primary"

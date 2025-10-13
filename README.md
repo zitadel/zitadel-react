@@ -22,33 +22,6 @@ The following pages are added to the scaffolded example application:
 - _src/components/Login.tsx_: The login page shows a button if no user is authenticated and redirects the user to /callback if authenticated.
 - _src/components/Callback.tsx_: This page completes the auth flow and renders the retrieved information from the user info endpoint.
 
-## Run
-
-To run the example, navigate to the `/lib` folder and run `yarn build`.
-
-```bash
-cd ./lib
-yarn install
-yarn build
-```
-
-then navigate back and install the dependencies of the example application
-
-```bash
-cd ..
-yarn install
-```
-
-Next follow the guide for React applications in our [docs](https://zitadel.com/docs/examples/login/react)
-and set `authority` as well as `client_id` in the `App.tsx` file.
-Finally you can start the application with
-
-```bash
-yarn start
-```
-
-Your application will then run on `http://localhost:3000`.
-
 ## Available scripts
 
 ### `yarn start`
@@ -103,7 +76,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ![App Screenshot](assets/token_settings.png)
 
 6. **Configure `ZitadelConfig`**  
-Open `src/App.tsx` and replace the placeholder values with your application info:
+Open `src/App.tsx` and replace the placeholder for *authority* and *client_id* values with your application info:
 
 ```js
 const config: ZitadelConfig = {
@@ -117,6 +90,24 @@ const config: ZitadelConfig = {
 ```
 
 7. **Run the application**
+
+To run the example, navigate to the `/lib` folder and run `yarn build`.
+
+```bash
+cd ./lib
+yarn install
+yarn build
+```
+
+Then, navigate back and install the dependencies
+
+```bash
+cd ..
+yarn install
+```
+
 ```bash
 yarn start
 ```
+
+Your application will then run on `http://localhost:3000`
