@@ -111,3 +111,25 @@ yarn start
 ```
 
 Your application will then run on `http://localhost:3000`
+
+## Enable Offline Access (Refresh Tokens)
+
+To retrieve a refresh token for offline access, follow these steps:
+
+1. Enable refresh tokens for your application:  
+   - Navigate to your [application settings](https://zitadel.com/docs/guides/manage/console/applications#application-settings) and enable the **Refresh Token** checkbox.
+
+2. Add the `offline_access` scope:
+
+```js
+const config: ZitadelConfig = {
+    authority: "https://CUSTOM_DOMAIN",
+    client_id: "YOUR_CLIENT_ID",
+    redirect_uri: "http://localhost:3000/callback",
+    post_logout_redirect_uri: "http://localhost:3000",
+    response_type: 'code',
+    scope: 'openid profile email offline_access'
+};
+```
+
+3. After logging out and logging back in, you will see the refresh token container displaying the refresh token.
