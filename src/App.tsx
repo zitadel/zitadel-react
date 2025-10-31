@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { createZitadelAuth, ZitadelConfig } from "@zitadel/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar";
 
 import Login from "./components/Login";
 import Callback from "./components/Callback";
@@ -32,6 +32,7 @@ function App() {
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [idToken, setIdToken] = useState<string | null>(null);
+  const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
   useEffect(() => {
     zitadel.userManager.getUser().then((user) => {
@@ -39,10 +40,12 @@ function App() {
         setAuthenticated(true);
         setAccessToken(user.access_token ?? null);
         setIdToken(user.id_token ?? null);
+        setRefreshToken(user.refresh_token ?? null);
       } else {
         setAuthenticated(false);
         setAccessToken(null);
         setIdToken(null);
+        setRefreshToken(null);
       }
     });
   }, [zitadel]);
@@ -53,7 +56,7 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Login authenticated={authenticated} handleLogin={login} handleLogout={logout} />
-          <JWTContainer accessToken={accessToken} idToken={idToken} />
+          <JWTContainer accessToken={accessToken} idToken={idToken} refreshToken={refreshToken} />
           <Routes>
             <Route
               path="/callback"
