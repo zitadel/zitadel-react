@@ -40,7 +40,7 @@ export function createZitadelAuth(zitadelConfig: ZitadelConfig): ZitadelAuth {
 
   const userManager = new UserManager({
     userStore: new WebStorageStateStore({ store: window.localStorage }),
-    loadUserInfo: true,
+    loadUserInfo: zitadelConfig.loadUserInfo ?? true,
     ...authConfig,
   });
 
